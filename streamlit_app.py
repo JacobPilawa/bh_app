@@ -38,7 +38,7 @@ def read_data():
     return df
     
 # Caching Simbad query to avoid rerunning it multiple times
-@st.cache_data
+#@st.cache_data
 def get_galaxy_coords(names):
     Simbad.add_votable_fields('ra', 'dec')
     galaxy_coords = []
