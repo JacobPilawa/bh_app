@@ -207,8 +207,8 @@ galaxy_coords = []
 
 for name in df['Name']:
     result = Simbad.query_object(name)
-    print(result['RA'][0])
     if result is not None:
+        print(result)
         ra = result['RA'][0]
         dec = result['DEC'][0]
         coord = SkyCoord(ra, dec, unit=(u.hourangle, u.deg))
