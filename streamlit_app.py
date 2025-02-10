@@ -206,7 +206,7 @@ Simbad.add_votable_fields('ra', 'dec')
 
 galaxy_coords = []
 
-for tqdm.tqdm(name in df['Name']):
+for name in tqdm.tqdm(df['Name']):
     result = Simbad.query_object(name)
     if result is not None:
         try:
