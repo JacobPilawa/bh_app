@@ -4,3 +4,4 @@ numpy
 astroquery
 astropy
 matplotlib
+tqdm
