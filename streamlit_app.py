@@ -317,7 +317,11 @@ st.markdown("""---""")
 
 st.subheader("References")
 
-st.markdown("""
+# Split the list into two columns
+col1, col2 = st.columns(2)
+
+# List of references
+references = """
 1. Atkinson et al. (2005MNRAS.359..504A)
 2. Barth et al. (2001ApJ...546..205B)
 3. Barth et al. (2009ApJ...690.1031B)
@@ -415,4 +419,19 @@ st.markdown("""
 95. Yamauchi et al. (2004PASJ...56..605Y)
 96. Yildirim et al. (2015MNRAS.452.1792Y)
 97. Ruffa & Davis (2024Galax..12...36R)
-""")
+"""
+
+# Split the references into two parts
+references_list = references.strip().split("\n")
+mid = len(references_list) // 2
+col1_references = references_list[:mid]
+col2_references = references_list[mid:]
+
+# Display the references in the two columns
+with col1:
+    for ref in col1_references:
+        st.markdown(ref)
+
+with col2:
+    for ref in col2_references:
+        st.markdown(ref)
