@@ -16,6 +16,7 @@ from astropy.coordinates import SkyCoord
 import astropy.units as u
 import matplotlib.pyplot as plt
 import re
+import tqdm
 #from astropy.visualization.wcsaxes import WCSAxes
 
 
@@ -205,7 +206,7 @@ Simbad.add_votable_fields('ra', 'dec')
 
 galaxy_coords = []
 
-for name in df['Name']:
+for tqdm.tqdm(name in df['Name']):
     result = Simbad.query_object(name)
     if result is not None:
         try:
