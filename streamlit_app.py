@@ -200,118 +200,118 @@ with col2:
 st.subheader("Galaxy Locations on Sky (Currently Broken)")
 st.text('Plot seemed to break when moving to a deployed app. Will fix soon!')
 
-# # Simbad query to get coordinates for galaxy names
-# Simbad.add_votable_fields('ra', 'dec')
-#
-# galaxy_coords = []
-#
-# for name in df['Name']:
-#     result = Simbad.query_object(name)
-#     if result is not None:
-#         ra = result['RA'][0]
-#         dec = result['DEC'][0]
-#         coord = SkyCoord(ra, dec, unit=(u.hourangle, u.deg))
-#         galaxy_coords.append({'Name': name, 'RA': coord.ra.deg, 'Dec': coord.dec.deg})
-#     else:
-#         galaxy_coords.append({'Name': name, 'RA': None, 'Dec': None})
-#
-# # Retrieve galaxy coordinates, caching the results
-# coord_df = get_galaxy_coords(df['Name'])
-#
-# # Merge with the main dataframe
-# df = df.merge(coord_df, on='Name', how='left')
-#
-# # Filter out rows with missing coordinates
-# skyplot_df = df.dropna(subset=['RA', 'Dec'])
-#
-# # List of methods (replace with your actual methods)
-# methods = skyplot_df['method'].unique()
-#
-# # Create a scatter trace for each method
-# fig = go.Figure()
-#
-# for method in methods:
-#     method_df = skyplot_df[skyplot_df['method'] == method]
-#
-#     if not method_df.empty:
-#         # Convert RA/Dec to radians for plotting in the Mollweide projection
-#         coords = SkyCoord(ra=method_df['RA'].values*u.degree, dec=method_df['Dec'].values*u.degree, frame='icrs')
-#
-#         # Convert RA to hours for proper plotting and display RA in HMS format
-#         ra_hms = [coord.ra.to_string(unit=u.hourangle, sep=':', precision=2, pad=True) for coord in coords]
-#         dec_deg = coords.dec.degree  # Dec in degrees
-#
-#         # Create a scatter plot for each method, using the same color as in the other plots
-#         fig.add_trace(go.Scattergeo(
-#             lon=coords.ra.wrap_at(180 * u.deg).deg,  # RA in degrees, wrapped [-180°, 180°]
-#             lat=dec_deg,
-#             text=method_df['Name'],  # Object names to show on hover
-#             mode='markers',
-#             marker=dict(size=10, color=color_map[method], opacity=0.8, line=dict(width=1, color='black')),  # Use color_map for consistent coloring
-#             hovertemplate=(
-#                 "RA: %{customdata[0]}<br>" +  # Display RA in HMS format
-#                 "Dec: %{lat:.2f}°<br>" +  # Display Dec in degrees
-#                 "Name: %{text}<extra></extra>"  # Display galaxy name
-#             ),
-#             customdata=np.array(ra_hms).reshape(-1, 1),  # Pass RA in HMS format as custom data for hover
-#             name=method
-#         ))
-#
-# # Add celestial equator (Dec = 0°)
-# celestial_equator_lon = np.linspace(-180, 180, 1000)  # Full range of RA in degrees
-# celestial_equator_lat = np.zeros_like(celestial_equator_lon)  # Dec = 0° for celestial equator
-#
-# # Add the equator line trace
-# fig.add_trace(go.Scattergeo(
-#     lon=celestial_equator_lon,
-#     lat=celestial_equator_lat,
-#     mode='lines',
-#     line=dict(color='blue', width=2),
-#     name='Celestial Equator'
-# ))
-#
-# # Add RA = 0h line (RA = 0°)
-# ra_zero_line_lon = np.zeros(100)  # RA = 0° (constant longitude)
-# ra_zero_line_lat = np.linspace(-90, 90, 100)  # Full range of Dec from -90° to +90°
-#
-# # Add the RA = 0h line trace
-# fig.add_trace(go.Scattergeo(
-#     lon=ra_zero_line_lon,  # RA = 0°
-#     lat=ra_zero_line_lat,  # Dec range from -90° to 90°
-#     mode='lines',
-#     line=dict(color='red', width=2, dash='dash'),  # Customize the line color and style
-#     name='RA = 0h'
-# ))
-#
-# # Set the layout for the sky plot (Mollweide projection)
-# fig.update_layout(
-#     showlegend=True,
-#     geo=dict(
-#         projection_type="mollweide",
-#         showcoastlines=False,
-#         showland=False,
-#         showframe=True,
-#         resolution=50,
-#         lonaxis=dict(
-#             showgrid=True,  # Show longitude grid
-#             gridcolor='lightgray',  # Color of the longitude grid
-#             tick0=-180,  # Start RA at -180 degrees
-#             dtick=30,  # Tick every 30 degrees
-#         ),
-#         lataxis=dict(
-#             showgrid=True,  # Show latitude grid
-#             gridcolor='lightgray',  # Color of the latitude grid
-#             tick0=-90,  # Start Dec at -90 degrees
-#             dtick=30,  # Tick every 30 degrees
-#         ),
-#         lonaxis_range=[-180, 180],  # Longitude range
-#         lataxis_range=[-90, 90],  # Latitude range
-#     ),
-#     margin=dict(l=0, r=0, t=50, b=0)
-# )
-#
-# # Display the interactive plot in Streamlit
-# st.plotly_chart(fig)
+# Simbad query to get coordinates for galaxy names
+Simbad.add_votable_fields('ra', 'dec')
+
+galaxy_coords = []
+
+for name in df['Name']:
+    result = Simbad.query_object(name)
+    if result is not None:
+        ra = result['RA'][0]
+        dec = result['DEC'][0]
+        coord = SkyCoord(ra, dec, unit=(u.hourangle, u.deg))
+        galaxy_coords.append({'Name': name, 'RA': coord.ra.deg, 'Dec': coord.dec.deg})
+    else:
+        galaxy_coords.append({'Name': name, 'RA': None, 'Dec': None})
+
+# Retrieve galaxy coordinates, caching the results
+coord_df = get_galaxy_coords(df['Name'])
+
+# Merge with the main dataframe
+df = df.merge(coord_df, on='Name', how='left')
+
+# Filter out rows with missing coordinates
+skyplot_df = df.dropna(subset=['RA', 'Dec'])
+
+# List of methods (replace with your actual methods)
+methods = skyplot_df['method'].unique()
+
+# Create a scatter trace for each method
+fig = go.Figure()
+
+for method in methods:
+    method_df = skyplot_df[skyplot_df['method'] == method]
+
+    if not method_df.empty:
+        # Convert RA/Dec to radians for plotting in the Mollweide projection
+        coords = SkyCoord(ra=method_df['RA'].values*u.degree, dec=method_df['Dec'].values*u.degree, frame='icrs')
+
+        # Convert RA to hours for proper plotting and display RA in HMS format
+        ra_hms = [coord.ra.to_string(unit=u.hourangle, sep=':', precision=2, pad=True) for coord in coords]
+        dec_deg = coords.dec.degree  # Dec in degrees
+
+        # Create a scatter plot for each method, using the same color as in the other plots
+        fig.add_trace(go.Scattergeo(
+            lon=coords.ra.wrap_at(180 * u.deg).deg,  # RA in degrees, wrapped [-180°, 180°]
+            lat=dec_deg,
+            text=method_df['Name'],  # Object names to show on hover
+            mode='markers',
+            marker=dict(size=10, color=color_map[method], opacity=0.8, line=dict(width=1, color='black')),  # Use color_map for consistent coloring
+            hovertemplate=(
+                "RA: %{customdata[0]}<br>" +  # Display RA in HMS format
+                "Dec: %{lat:.2f}°<br>" +  # Display Dec in degrees
+                "Name: %{text}<extra></extra>"  # Display galaxy name
+            ),
+            customdata=np.array(ra_hms).reshape(-1, 1),  # Pass RA in HMS format as custom data for hover
+            name=method
+        ))
+
+# Add celestial equator (Dec = 0°)
+celestial_equator_lon = np.linspace(-180, 180, 1000)  # Full range of RA in degrees
+celestial_equator_lat = np.zeros_like(celestial_equator_lon)  # Dec = 0° for celestial equator
+
+# Add the equator line trace
+fig.add_trace(go.Scattergeo(
+    lon=celestial_equator_lon,
+    lat=celestial_equator_lat,
+    mode='lines',
+    line=dict(color='blue', width=2),
+    name='Celestial Equator'
+))
+
+# Add RA = 0h line (RA = 0°)
+ra_zero_line_lon = np.zeros(100)  # RA = 0° (constant longitude)
+ra_zero_line_lat = np.linspace(-90, 90, 100)  # Full range of Dec from -90° to +90°
+
+# Add the RA = 0h line trace
+fig.add_trace(go.Scattergeo(
+    lon=ra_zero_line_lon,  # RA = 0°
+    lat=ra_zero_line_lat,  # Dec range from -90° to 90°
+    mode='lines',
+    line=dict(color='red', width=2, dash='dash'),  # Customize the line color and style
+    name='RA = 0h'
+))
+
+# Set the layout for the sky plot (Mollweide projection)
+fig.update_layout(
+    showlegend=True,
+    geo=dict(
+        projection_type="mollweide",
+        showcoastlines=False,
+        showland=False,
+        showframe=True,
+        resolution=50,
+        lonaxis=dict(
+            showgrid=True,  # Show longitude grid
+            gridcolor='lightgray',  # Color of the longitude grid
+            tick0=-180,  # Start RA at -180 degrees
+            dtick=30,  # Tick every 30 degrees
+        ),
+        lataxis=dict(
+            showgrid=True,  # Show latitude grid
+            gridcolor='lightgray',  # Color of the latitude grid
+            tick0=-90,  # Start Dec at -90 degrees
+            dtick=30,  # Tick every 30 degrees
+        ),
+        lonaxis_range=[-180, 180],  # Longitude range
+        lataxis_range=[-90, 90],  # Latitude range
+    ),
+    margin=dict(l=0, r=0, t=50, b=0)
+)
+
+# Display the interactive plot in Streamlit
+st.plotly_chart(fig)
 
 
 st.markdown("""---""")
