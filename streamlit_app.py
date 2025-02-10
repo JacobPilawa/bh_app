@@ -38,7 +38,7 @@ def read_data():
     return df
     
 # Caching Simbad query to avoid rerunning it multiple times
-#@st.cache_data
+@st.cache_data
 def get_galaxy_coords(names):
     Simbad.add_votable_fields('ra', 'dec')
     galaxy_coords = []
@@ -206,16 +206,16 @@ Simbad.add_votable_fields('ra', 'dec')
 
 galaxy_coords = []
 
-for name in tqdm.tqdm(df['Name']):
-    result = Simbad.query_object(name)
-    if result is not None:
-        try:
-            ra = result['ra'][0]
-            dec = result['dec'][0]
-            coord = SkyCoord(ra, dec, unit=(u.hourangle, u.deg))
-            galaxy_coords.append({'Name': name, 'RA': coord.ra.deg, 'Dec': coord.dec.deg})
-        except:
-            galaxy_coords.append({'Name': name, 'RA': None, 'Dec': None})
+# for name in tqdm.tqdm(df['Name']):
+#     result = Simbad.query_object(name)
+#     if result is not None:
+#         try:
+#             ra = result['ra'][0]
+#             dec = result['dec'][0]
+#             coord = SkyCoord(ra, dec, unit=(u.hourangle, u.deg))
+#             galaxy_coords.append({'Name': name, 'RA': coord.ra.deg, 'Dec': coord.dec.deg})
+#         except:
+#             galaxy_coords.append({'Name': name, 'RA': None, 'Dec': None})
 
 # Retrieve galaxy coordinates, caching the results
 coord_df = get_galaxy_coords(df['Name'])
