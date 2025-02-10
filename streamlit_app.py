@@ -15,6 +15,7 @@ from astroquery.simbad import Simbad
 from astropy.coordinates import SkyCoord
 import astropy.units as u
 import matplotlib.pyplot as plt
+import re
 #from astropy.visualization.wcsaxes import WCSAxes
 
 
@@ -315,6 +316,30 @@ st.text('Plot seemed to break when moving to a deployed app. Will fix soon!')
 
 st.markdown("""---""")
 
+def references_to_hyperlinks(references):
+    """
+    Convert references into hyperlinks pointing to ADS using the reference code in parentheses.
+    
+    Args:
+    references (str): A string of references formatted with author names and ADS reference codes.
+    
+    Returns:
+    str: The modified string where each reference is a clickable hyperlink.
+    """
+    # Define a regex pattern to match the reference code inside parentheses
+    pattern = r"\(([^)]+)\)"
+    
+    # Create a function to replace the matched reference code with a hyperlink
+    def add_hyperlink(match):
+        ref_code = match.group(1)
+        link = f"https://adsabs.harvard.edu/abs/{ref_code}"
+        return f"([Link]({link}))"
+    
+    # Replace each reference code with the corresponding hyperlink
+    modified_references = re.sub(pattern, add_hyperlink, references)
+    
+    return modified_references
+
 st.subheader("References")
 
 # Split the list into two columns
@@ -421,8 +446,10 @@ references = """
 97. Ruffa & Davis (2024Galax..12...36R)
 """
 
+modified_references = references_to_hyperlinks(references)
+
 # Split the references into two parts
-references_list = references.strip().split("\n")
+references_list = modified_references.strip().split("\n")
 mid = len(references_list) // 2
 col1_references = references_list[:mid]
 col2_references = references_list[mid:]
