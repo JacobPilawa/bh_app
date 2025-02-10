@@ -1,0 +1,26 @@
+Overall notes:
+* Joined (star) and (stars) from Remco's paper table
+* I think there might have been 2 overlapping points between Remcos CO targets and those in Davis' review
+
+
+Notes on particular galaxies:
+
+NGC1097: only listed 3 sigma errors
+NGC3258: 1 sigma errors added in quadrature
+NGC612: three upper limits quoted, i averaged
+NGC524: 3 sigma uncertainties
+NGC4429: hard to tell what these uncertainties are, but im adding the abstract values in quadrature
+NGC 4751: rounded to 1 less digit precision because of my table constraints; can definitely fix this
+NGC1684:  rounded to 1 less digit precision because of my table constraints; can definitely fix this
+NGC997: rounded to 1 less digit precision because of my table constraints; can definitely fix this
+NGC1275: weird distance reported, need to double check; also same with BH mass but taking the values they report at least 
+NGC3557: weird distnace reporting; also unclear what the errors are
+NGC5193: added all errors in quad.
+NGC4786: taking their angular diameter distance but they have d_L as well; added all error in quadrature
+NGC4261: grabbed d_L; WISDOM AND JONELLE BOTH DID THIS?;
+NGC612: grabbed d_L,
+NGC1574: grabbed d_L,
+NGC315: added errors in quadrature
+NGC6861: quoted 1-3e9
+NGC1380: applied "40% uncertainty" as quoted in abstract
+UGC2698: added errors in quadrature

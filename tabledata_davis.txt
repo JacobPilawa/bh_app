@@ -1,0 +1,65 @@
+Title: Molecular Gas Kinematics in Local Early-Type Galaxies with ALMA
+Authors: Ilaria Ruffa and Timothy A. Davis
+Table: Red points in Figure 8
+================================================================================
+Byte-by-byte Description of file
+--------------------------------------------------------------------------------
+   Bytes Format Units    Label     Explanations
+--------------------------------------------------------------------------------
+   1- 12 A12    ---      Name      Name
+  14- 14 I1     ---    f_Name      ? Omission Flag (1)
+  16- 20 F5.1   Mpc      Dist      Distance
+  22- 25 F4.1   Mpc    e_Dist      Uncertainty in Dist
+  27- 31 F5.2   [Msun]   BHMass    Black Hole Mass, log solar units
+  33- 36 F4.2   [Msun] E_BHMass    Upper uncertainty on BHMass
+  38- 41 F4.2   [Msun] e_BHMass    Lower uncertainty on BHMass
+  43- 46 F4.2   [km/s]   {sigma}   Stellar velocity dispersion inside Re, log km/s
+  48- 51 F4.2   [km/s] e_{sigma}   Uncertainty on {sigma}
+  53- 57 F5.2   [Lsun]   logLk     Total luminosity, log solar units
+  59- 62 F4.2   [Lsun] e_logLk     Uncertainty in logLk
+  64- 68 F5.2   [kpc]    Re        Half-light radius, log kpc
+  70- 73 F4.2   [kpc]  e_Re        Uncertainty in Re
+  75- 78 F4.2   ---      covar     Covariance between Lk and Re
+  80- 83 F4.1   ---      C28       Concentration, 5logR20/R80
+  85- 87 F3.1   ---    e_C28       Uncertainty in C28
+  89- 93 F5.2   [Lsun]   AGN       ? Non-stellar AGN flux, log solar units
+  95- 98 F4.2   [Lsun] e_AGN       ? Uncertainty in logL-AGN
+ 100-105 A6     ---      method    Method used for BH mass measurement (2)
+ 107-114 A8     ---      Refs      Literature References (3)
+--------------------------------------------------------------------------------
+Note (1): Omission Flag; blank indicates included in fits.
+    1 = Objects omitted from the fits.
+Note (2): Method used for BH mass measurement
+        CO = gas dynamic;
+       gas = gas dynamic;
+     maser = megamasers;
+    reverb = reverberation mapping;
+      star = stellar dynamics;
+     stars = stellar dynamics.
+Note (3): Literature References
+    97 =  Ruffa & Davis
+--------------------------------------------------------------------------------
+NGC4526         16.4       8.65 0.09 0.18 2.35                                                     CO     97        
+NGC1097         14.5       8.15 0.09 0.09 2.29 0.02                                                CO     97        
+NGC3258         31.9  3.9  9.35 0.05 0.06 2.41 0.04                                                CO     97        
+UGC2698         91.0       9.39 0.11 0.17 2.48                                                     CO     97        
+NGC1380         17.1       8.17 0.15 0.22 2.33                                                     CO     97        
+NGC6861         27.3       9.30 0.18 0.30 2.59                                                     CO     97        
+NGC315          70.0       9.32 0.06 0.03 2.53                                                     CO     97        
+NGC4786         62.1       8.70 0.11 0.13                                                          CO     97        
+NGC5193         46.8  4.5  8.15 0.32 0.03                                                          CO     97        
+NGC1332         22.3       8.84 0.01 0.01                                                          CO     97        
+NGC3557                    8.85 0.02 0.02 2.45                                                     CO     97        
+NGC1275                    9.06 0.16 0.25 2.40                                                     CO     97        
+NGC1684         62.8       9.15 0.05 0.05 2.42                                                     CO     97        
+NGC997          90.4       8.98 0.10 0.22 2.33                                                     CO     97        
+NGC4751         26.9       9.54 0.02 0.02 2.55 0.04                                                CO     97        
+NGC3665         34.7       8.76 0.03 0.03 2.33 0.04                                                CO     97        
+NGC4697         11.4  1.1  8.10 0.02 0.01 2.23                                                     CO     97        
+NGC4429         16.5  1.6  8.18 0.05 0.12 2.25                                                     CO     97        
+NGC524          23.3  2.3  8.60 0.27 0.30 2.34                                                     CO     97        
+NGC383          66.6  9.9  9.63 0.04 0.04 2.38 0.06                                                CO     97        
+NGC7052         69.3       9.40 0.02 0.02 2.42 0.04                                                CO     97        
+NGC4261         31.6       9.21 0.01 0.01 2.42 0.04                                                CO     97        
+NGC612         130.4       9.36 0.00 9.36 2.46 0.09                                                CO     97        
+NGC1574         19.9       8.00 0.07 0.09 2.33 0.06                                                CO     97        
