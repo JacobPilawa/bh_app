@@ -207,6 +207,7 @@ galaxy_coords = []
 
 for name in df['Name']:
     result = Simbad.query_object(name)
+    print(result)
     if result is not None:
         ra = result['RA'][0]
         dec = result['DEC'][0]
