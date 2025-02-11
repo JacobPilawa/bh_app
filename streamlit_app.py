@@ -19,8 +19,6 @@ import re
 import tqdm
 import astroquery
 import astropy
-print(astroquery.__version__)
-print(astropy.__version__)
 #from astropy.visualization.wcsaxes import WCSAxes
 
 
@@ -46,11 +44,8 @@ def read_data():
 def get_galaxy_coords(names):
     Simbad.add_votable_fields('ra', 'dec')
     galaxy_coords = []
-    print('RUNNING RUNNING RUNNING RUNNING') 
-    
     for name in names:
         result = Simbad.query_object(name)
-        print(result)
         if result is not None:
             ra = result['RA'][0]
             dec = result['DEC'][0]
@@ -306,6 +301,17 @@ fig.update_layout(
     ),
     margin=dict(l=0, r=0, t=50, b=0)
 )
+
+# Calculate the fraction of galaxies with coordinates
+total_galaxies = len(df)
+galaxies_with_coords = len(skyplot_df)
+fraction_with_coords = galaxies_with_coords / total_galaxies * 100
+
+# Add subtitle
+st.subheader(f"Galaxy Locations on Sky (Currently Broken)")
+st.text(f'Plot seemed to break when moving to a deployed app. Will fix soon!')
+st.text(f'Coordinates found for {galaxies_with_coords}/{total_galaxies} galaxies '
+        f'({fraction_with_coords:.2f}%)')
 
 # Display the interactive plot in Streamlit
 st.plotly_chart(fig)
