@@ -210,11 +210,23 @@ galaxy_coords = []
 # Retrieve galaxy coordinates, caching the results
 coord_df = get_galaxy_coords(df['Name'])
 
-# Merge with the main dataframe
-df = df.merge(coord_df, on='Name', how='left')
-
 # Filter out rows with missing coordinates
 skyplot_df = df.dropna(subset=['RA', 'Dec'])
+
+# Calculate the fraction of galaxies with coordinates
+# BEFORE we merge the dataframes. Otherwise we risk double counting.
+total_galaxies = len(df)
+galaxies_with_coords = len(skyplot_df)
+fraction_with_coords = galaxies_with_coords / total_galaxies * 100
+
+# Add subtitle
+st.subheader(f"Galaxy Locations on Sky (Takes a minute to query...)")
+st.text(f'Coordinates found for {galaxies_with_coords}/{total_galaxies} galaxies '
+        f'({fraction_with_coords:.2f}%)')
+
+
+# Merge with the main dataframe
+df = df.merge(coord_df, on='Name', how='left')
 
 # List of methods (replace with your actual methods)
 methods = skyplot_df['method'].unique()
@@ -302,16 +314,6 @@ fig.update_layout(
     margin=dict(l=0, r=0, t=50, b=0)
 )
 
-# Calculate the fraction of galaxies with coordinates
-total_galaxies = len(df)
-galaxies_with_coords = len(skyplot_df)
-fraction_with_coords = galaxies_with_coords / total_galaxies * 100
-
-# Add subtitle
-st.subheader(f"Galaxy Locations on Sky (Takes a minute to query...)")
-st.text(f'Plot seemed to break when moving to a deployed app. Will fix soon!')
-st.text(f'Coordinates found for {galaxies_with_coords}/{total_galaxies} galaxies '
-        f'({fraction_with_coords:.2f}%)')
 
 # Display the interactive plot in Streamlit
 st.plotly_chart(fig)
