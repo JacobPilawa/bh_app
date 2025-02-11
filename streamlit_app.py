@@ -149,6 +149,7 @@ for method in methods:
         x=method_df['BHMass'],
         name=method,
         marker=dict(color=color_map[method]),
+        histnorm='probability density',
         opacity=0.5,   # Set some transparency for better visibility
         nbinsx=20
     ))
