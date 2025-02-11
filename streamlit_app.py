@@ -225,7 +225,7 @@ skyplot_df = df.dropna(subset=['RA', 'Dec'])
 num_galaxies_with_coords = len(coord_df.dropna(subset=['RA', 'Dec']))
 
 # add subtitle
-st.text(f'Coordinates found for {num_galaxies_with_coords} out of {num_total_galaxies} galaxies ({np.round(num_galaxies_with_coords/num_total_galaxies * 100, 1)}%)!')
+st.text(f'Coordinates found for {num_galaxies_with_coords} out of {num_total_galaxies} galaxies ({np.round(num_galaxies_with_coords/num_total_galaxies * 100, 1)}%)! The other galaxies exist, but their coordinates are a bit hard to find from a simple SIMBAD query.')
 
 # List of methods (replace with your actual methods)
 methods = skyplot_df['method'].unique()
