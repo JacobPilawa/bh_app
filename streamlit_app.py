@@ -134,6 +134,47 @@ fig.update_layout(
 
 st.plotly_chart(fig, use_container_width=True)
 
+
+# Section: Combined Histogram Plot (all individual methods + overall on the same plot)
+st.subheader("Combined Histogram of Black Hole Masses")
+
+# Create the figure for combined plot
+combined_hist_fig = go.Figure()
+
+# Add individual histograms for each method
+for method in methods:
+    method_df = df[df['method'] == method]
+    
+    combined_hist_fig.add_trace(go.Histogram(
+        x=method_df['BHMass'],
+        name=method,
+        marker=dict(color=color_map[method]),
+        opacity=0.5,   # Set some transparency for better visibility
+        nbinsx=20
+    ))
+
+# Add the overall histogram for all methods
+combined_hist_fig.add_trace(go.Histogram(
+    x=df['BHMass'],
+    name='Overall',
+    marker=dict(color='black'),
+    opacity=0.3,  # Slightly more transparent for the overall data
+    nbinsx=20
+))
+
+# Update layout for combined plot
+combined_hist_fig.update_layout(
+    barmode='overlay',  # Overlay the histograms on the same plot
+    title="Combined Histogram of Black Hole Masses by Method",
+    xaxis_title="log(M<sub>BH</sub> / M<sub>&#9737;</sub>)",
+    yaxis_title="Count",
+    height=600,
+    margin=dict(l=50, r=50, t=50, b=50),
+)
+
+# Display the combined plot
+st.plotly_chart(combined_hist_fig, use_container_width=True)
+
 # Bar chart and histogram
 st.subheader("Method Counts and Distances")
 
