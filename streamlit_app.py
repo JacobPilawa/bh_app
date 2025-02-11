@@ -159,6 +159,7 @@ combined_hist_fig.add_trace(go.Histogram(
     x=df['BHMass'],
     name='Overall',
     marker=dict(color='black'),
+    histnorm='probability density',
     opacity=0.3,  # Slightly more transparent for the overall data
     nbinsx=20
 ))
