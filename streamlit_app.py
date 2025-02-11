@@ -308,7 +308,7 @@ galaxies_with_coords = len(skyplot_df)
 fraction_with_coords = galaxies_with_coords / total_galaxies * 100
 
 # Add subtitle
-st.subheader(f"Galaxy Locations on Sky (Currently Broken)")
+st.subheader(f"Galaxy Locations on Sky (Takes a minute to query...)")
 st.text(f'Plot seemed to break when moving to a deployed app. Will fix soon!')
 st.text(f'Coordinates found for {galaxies_with_coords}/{total_galaxies} galaxies '
         f'({fraction_with_coords:.2f}%)')
