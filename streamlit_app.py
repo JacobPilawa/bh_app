@@ -200,8 +200,7 @@ with col2:
 ########################################
 # New Feature: Galaxy Locations on Sky
 ########################################
-st.subheader("Galaxy Locations on Sky (Currently Broken)")
-st.text('Plot seemed to break when moving to a deployed app. Will fix soon!')
+st.subheader("Galaxy Locations on Sky")
 
 # Simbad query to get coordinates for galaxy names
 Simbad.add_votable_fields('ra', 'dec')
