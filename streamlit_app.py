@@ -17,6 +17,10 @@ import astropy.units as u
 import matplotlib.pyplot as plt
 import re
 import tqdm
+import astroquery
+import astropy
+print(astroquery.__version__)
+print(astropy.__version__)
 #from astropy.visualization.wcsaxes import WCSAxes
 
 
@@ -47,8 +51,8 @@ def get_galaxy_coords(names):
     for name in names:
         result = Simbad.query_object(name)
         if result is not None:
-            ra = result['ra'][0]
-            dec = result['dec'][0]
+            ra = result['RA'][0]
+            dec = result['DEC'][0]
             coord = SkyCoord(ra, dec, unit=(u.hourangle, u.deg))
             galaxy_coords.append({'Name': name, 'RA': coord.ra.deg, 'Dec': coord.dec.deg})
         else:
@@ -206,17 +210,6 @@ st.text('Plot seemed to break when moving to a deployed app. Will fix soon!')
 Simbad.add_votable_fields('ra', 'dec')
 
 galaxy_coords = []
-
-# for name in tqdm.tqdm(df['Name']):
-#     result = Simbad.query_object(name)
-#     if result is not None:
-#         try:
-#             ra = result['ra'][0]
-#             dec = result['dec'][0]
-#             coord = SkyCoord(ra, dec, unit=(u.hourangle, u.deg))
-#             galaxy_coords.append({'Name': name, 'RA': coord.ra.deg, 'Dec': coord.dec.deg})
-#         except:
-#             galaxy_coords.append({'Name': name, 'RA': None, 'Dec': None})
 
 # Retrieve galaxy coordinates, caching the results
 coord_df = get_galaxy_coords(df['Name'])
