@@ -50,6 +50,7 @@ def get_galaxy_coords(names):
     
     for name in names:
         result = Simbad.query_object(name)
+        print(result)
         if result is not None:
             ra = result['RA'][0]
             dec = result['DEC'][0]
