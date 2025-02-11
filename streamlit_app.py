@@ -60,6 +60,7 @@ def get_galaxy_coords(names):
 # Read data
 df = read_data()
 
+
 # Scatter Plot: BHMass vs Sigma with Asymmetric Errors (using Plotly)
 st.title("SMBH Mass Measurements")
 
@@ -207,11 +208,13 @@ Simbad.add_votable_fields('ra', 'dec')
 
 galaxy_coords = []
 
-# get total number of galaxies in the table
-num_total_galaxies = len(df)
-
 # Retrieve galaxy coordinates, caching the results
 coord_df = get_galaxy_coords(df['Name'])
+
+# get total number of galaxies
+num_total_galaxies = len(df)
+# get total number of galaxies with coordinates
+num_galaxies_with_coords = len(coord_df.dropna(subset=['RA', 'Dec']))
 
 # Merge with the main dataframe
 df = df.merge(coord_df, on='Name', how='left')
@@ -220,10 +223,10 @@ df = df.merge(coord_df, on='Name', how='left')
 skyplot_df = df.dropna(subset=['RA', 'Dec'])
 
 # get total number of galaxies with coordinates
-num_galaxies_with_coords = len(skyplot_df)
+num_galaxies_with_coords = len(coord_df.dropna(subset=['RA', 'Dec']))
 
 # add subtitle
-st.text(f'Coordinates found for {num_galaxies_with_coords} out of {num_total_galaxies} galaxies')
+st.text(f'Coordinates found for {num_galaxies_with_coords} out of {num_total_galaxies} galaxies ({np.round(num_galaxies_with_coords/num_total_galaxies * 100, 1)}%)!')
 
 # List of methods (replace with your actual methods)
 methods = skyplot_df['method'].unique()
