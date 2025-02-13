@@ -1,6 +1,9 @@
 Overall notes:
 * Joined (star) and (stars) from Remco's paper table
 * I think there might have been 2 overlapping points between Remcos CO targets and those in Davis' review
+* i obtained the velocity dispersions for the galaxy's in emily's paper from MASSSIVE 1 if available. if not in that source, i tried to find quoted value from the dynamical measurement.
+
+
 
 
 Notes on particular galaxies:

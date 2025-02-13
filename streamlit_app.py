@@ -24,6 +24,12 @@ import astropy
 
 # Function to read data
 def read_data():
+    
+    # Find the number of rows to skip until the line that starts with "3C120"
+    with open('tabledata.txt', 'r') as file:
+        lines = file.readlines()
+        skiprows = next(i for i, line in enumerate(lines) if line.startswith("3C120"))
+
     colspecs = [(0, 12), (13, 14), (15, 20), (21, 25), (26, 31), 
                 (32, 36), (37, 41), (42, 46), (47, 51), (52, 57), 
                 (58, 62), (63, 68), (69, 73), (74, 78), (79, 83), 
@@ -36,7 +42,7 @@ def read_data():
         "e_C28", "AGN", "e_AGN", "method", "Refs"
     ]
     
-    df = pd.read_fwf('tabledata.txt', colspecs=colspecs, header=None, names=column_names, na_values='?', skiprows=136)
+    df = pd.read_fwf('tabledata.txt', colspecs=colspecs, header=None, names=column_names, na_values='?', skiprows=skiprows)
     return df
     
 # Caching Simbad query to avoid rerunning it multiple times
@@ -69,6 +75,15 @@ st.markdown("""
 The data table below currently includes:
 * [Table 2 from "Unification of the fundamental plane and Super Massive Black Hole Masses"](https://ui.adsabs.harvard.edu/abs/2016ApJ...831..134V/abstract)
 * [Figure 8 (Red Points) from "Molecular Gas Kinematics in Local Early-Type Galaxies with ALMA"](https://ui.adsabs.harvard.edu/abs/2024Galax..12...36R/abstract)
+* [Table A1 from "Big Galaxies and Big Black Holes: The Massive Ends of the Local Stellar and Black Hole Mass Functions and the Implications for Nanohertz Gravitational Waves"](https://ui.adsabs.harvard.edu/abs/2024ApJ...971L..29L/abstract)
+
+There are a number of things I'd still like to clean up, including:
+* Ensure that I'm adding the references at the bottom of the page in a consistent way/make sure they all point to the correct articles. One example to check is NGC 4889.
+* Removal of duplicate rows if they appear in more than one work. I think there are a few stragglers that are still being included from multiple sources, I just haven't gone back with a fine tooth comb.
+* Develop a better naming scheme for the methods. Obviously the way below is not ideal (e.g., I'm currently splitted groups which should be combined), but we can decide at a later point what would be most useful.
+* Fill in missing data: I kept the same table structure as in Remco's paper, but unsure if we need all of this information. I've primarly been compiling distances/mass measurements/sigmas/and references. I can go back later and fill in whatever additional information we'd like. 
+* In general have a better process for joining different datasets. Currently doing some combination of manual entry + recompiling a data table, but I'm sure there is a better approach to this before the dataset gets too large.
+
 """)
 
 
@@ -448,6 +463,7 @@ references = """
 95. Yamauchi et al. (2004PASJ...56..605Y)
 96. Yildirim et al. (2015MNRAS.452.1792Y)
 97. Ruffa & Davis (2024Galax..12...36R)
+98. Liepold & Ma (2024ApJ...971L..29L)
 """
 
 modified_references = references_to_hyperlinks(references)
