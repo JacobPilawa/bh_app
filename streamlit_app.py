@@ -78,7 +78,7 @@ The data table below currently includes:
 * [Table A1 from "Big Galaxies and Big Black Holes: The Massive Ends of the Local Stellar and Black Hole Mass Functions and the Implications for Nanohertz Gravitational Waves"](https://ui.adsabs.harvard.edu/abs/2024ApJ...971L..29L/abstract)
 
 There are a number of things I'd still like to clean up, including:
-* Ensure that I'm adding the references at the bottom of the page in a consistent way/make sure they all point to the correct articles. One example to check is NGC 4889.
+* Ensure that I'm adding the references at the bottom of the page in a consistent way/make sure they all point to the correct articles. One example to check is NGC 4889 in Remco's paper vs. how it appears in the references below since I think they're currently inconsistent.
 * Removal of duplicate rows if they appear in more than one work. I think there are a few stragglers that are still being included from multiple sources, I just haven't gone back with a fine tooth comb.
 * Develop a better naming scheme for the methods. Obviously the way below is not ideal (e.g., I'm currently splitted groups which should be combined), but we can decide at a later point what would be most useful.
 * Fill in missing data: I kept the same table structure as in Remco's paper, but unsure if we need all of this information. I've primarly been compiling distances/mass measurements/sigmas/and references. I can go back later and fill in whatever additional information we'd like. 
